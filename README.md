@@ -7,11 +7,17 @@ When I add my database name, MySQL username, and MySQL password to an environmen
 
 Instructions used in the terminal to run:
 cd db
+
 mysql -u root -p
+
 source schema.sql
+
 quit
+
 cd ..
+
 node seeds/index.js
+
 node server.js
 
 Application Demo Video:
