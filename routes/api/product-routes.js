@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
 })
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -122,8 +122,22 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
+  try {
+    const productData = await Product.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (productData) {
+      res.status(200).json({ status: `Deleted category id = ${req.params.id}`})
+    } else {
+      res.status(400).json({ status: `No category of id = ${req.params.id}`})
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 module.exports = router;
